@@ -22,7 +22,7 @@ async def populate_mock():
         venue = Venue(
             id=1,
             name="Philharmonie de Paris",
-            url="https://www.philharmonie.fr",
+            address="221 Avenue Jean Jaurès, 75019 Paris",
             city="Paris",
             country="France"
         )
