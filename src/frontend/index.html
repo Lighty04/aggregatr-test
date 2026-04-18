@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Aggregator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>📅 Event Aggregator</h1>
+            <p>Discover events from multiple venues</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="filters">
+            <div class="filter-group">
+                <label for="venue-filter">Venue</label>
+                <select id="venue-filter">
+                    <option value="">All Venues</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="date-from">From</label>
+                <input type="date" id="date-from">
+            </div>
+            <div class="filter-group">
+                <label for="date-to">To</label>
+                <input type="date" id="date-to">
+            </div>
+            <div class="filter-actions">
+                <button id="apply-filters" class="btn btn-primary">Apply Filters</button>
+                <button id="clear-filters" class="btn btn-secondary">Clear</button>
+            </div>
+        </section>
+
+        <section class="stats">
+            <span id="events-count">Loading events...</span>
+        </section>
+
+        <section id="events-grid" class="events-grid">
+            <div class="loading">Loading events...</div>
+        </section>
+
+        <section class="pagination">
+            <button id="prev-page" class="btn btn-secondary" disabled>← Previous</button>
+            <span id="page-info">Page 1 of 1</span>
+            <button id="next-page" class="btn btn-secondary" disabled>Next →</button>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>Event Aggregator &copy; 2025</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
