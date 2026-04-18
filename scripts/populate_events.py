@@ -11,10 +11,11 @@ import os
 # Add project root to path
 sys.path.insert(0, '/home/decisionhelper/aggregatr-test')
 
+import httpx
 from src.models.database import create_db_and_tables, AsyncSessionLocal
 from src.models.venue import Venue
 from src.models.event import Event
-from src.fetchers.runner import run_fetcher
+from src.fetchers.philharmonie import PhilharmonieFetcher
 
 async def populate():
     """Fetch events and populate database."""
@@ -22,7 +23,13 @@ async def populate():
     await create_db_and_tables()
     
     print("Fetching events from Philharmonie...")
-    result = await run_fetcher('philharmonie')
+    async with httpx.AsyncClient() as client:
+        fetcher = PhilharmonieFetcher(client)
+        try:
+            result = await fetcher.fetch_data("https://www.philharmonie.fr")
+        except Exception as e:
+            print(f"Fetch failed: {e}")
+            return
     
     if result['status'] != 'success':
         print(f"Fetch failed: {result.get('error', 'Unknown error')}")
