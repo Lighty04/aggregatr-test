@@ -1,6 +1,7 @@
 from .base import BaseFetcher, FetchingError
 from bs4 import BeautifulSoup
 from typing import Dict, Any
+import httpx
 import logging
 
 logger = logging.getLogger("ExampleVenueFetcher")
