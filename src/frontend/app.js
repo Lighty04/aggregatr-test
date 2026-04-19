@@ -233,7 +233,7 @@ async function loadEvents() {
     const data = await fetchEvents(currentFilters);
     
     if (data) {
-        renderEvents(data.events || []);
+        renderEvents(data.items || []);
         totalPages = data.total_pages || 1;
         currentPage = data.current_page || 1;
         updatePagination();
