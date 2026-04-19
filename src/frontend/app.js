@@ -99,22 +99,19 @@ function renderEvents(events) {
     
     grid.innerHTML = events.map(event => `
         <article class="event-card">
-            <h2 class="event-title">${escapeHtml(event.title)}</h2>
-            <span class="event-venue">${escapeHtml(event.venue)}</span>
+            <h2 class="event-title">${escapeHtml(event.name)}</h2>
+            <span class="event-venue">${escapeHtml(event.venue?.name || 'Venue TBA')}</span>
             <div class="event-meta">
                 <div class="event-meta-item">
                     <span>📅</span>
-                    <time>${formatDate(event.date)}</time>
+                    <time>${formatDate(event.start_time)}</time>
                 </div>
                 <div class="event-meta-item">
                     <span>📍</span>
-                    <span>${escapeHtml(event.location || 'Location TBA')}</span>
-                </div>
-                <div class="event-meta-item">
-                    <span>💰</span>
-                    <span>${event.price ? formatPrice(event.price) : 'Free'}</span>
+                    <span>${escapeHtml(event.venue?.city || 'Location TBA')}</span>
                 </div>
             </div>
+            ${event.description ? `<div class="event-description">${escapeHtml(event.description)}</div>` : ''}
         </article>
     `).join('');
 }
