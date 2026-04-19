@@ -36,11 +36,26 @@ async def list_events(
     if end_date is not None:
         query = query.where(Event.start_time <= end_date)
     
+    # Get total count for pagination
+    count_query = select(func.count()).select_from(Event)
+    if venue_id is not None:
+        count_query = count_query.where(Event.venue_id == venue_id)
+    if start_date is not None:
+        count_query = count_query.where(Event.start_time >= start_date)
+    if end_date is not None:
+        count_query = count_query.where(Event.start_time <= end_date)
+    
+    total_result = await db.execute(count_query)
+    total = total_result.scalar()
+    
     # Add pagination
     query = query.offset(offset).limit(limit)
     
     result = await db.execute(query)
     events = result.scalars().all()
+    
+    total_pages = (total + limit - 1) // limit
+    current_page = (offset // limit) + 1
     
     return {
         "items": [{
@@ -62,6 +77,9 @@ async def list_events(
         } for e in events],
         "limit": limit,
         "offset": offset,
+        "total": total,
+        "total_pages": total_pages,
+        "current_page": current_page,
     }
 
 

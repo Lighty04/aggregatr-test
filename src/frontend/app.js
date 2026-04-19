@@ -22,7 +22,13 @@ async function fetchEvents(filters = {}) {
         if (filters.venue) params.append('venue', filters.venue);
         if (filters.dateFrom) params.append('date_from', filters.dateFrom);
         if (filters.dateTo) params.append('date_to', filters.dateTo);
-        if (filters.page) params.append('page', filters.page);
+        if (filters.page) {
+            const offset = (filters.page - 1) * 100;
+            params.append('limit', 100);
+            params.append('offset', offset);
+        } else {
+            params.append('limit', 100);
+        }
         
         const queryString = params.toString() ? `?${params.toString()}` : '';
         const response = await fetch(`${API_BASE}/events${queryString}`);
