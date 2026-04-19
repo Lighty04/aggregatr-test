@@ -10,7 +10,7 @@ class Base(DeclarativeBase):
 
 # Database URL (using SQLite for simplicity, can be changed to PostgreSQL/MySQL)
 # Example for PostgreSQL: "postgresql+asyncpg://user:password@host/dbname"
-SQLALCHEMY_DATABASE_URL = "sqlite+aiosqlite:///./aggregatr_test.db"
+SQLALCHEMY_DATABASE_URL = "sqlite+aiosqlite:///./aggregatr.db"
 
 # Create the async engine
 # echo=True prints the generated SQL to the console
